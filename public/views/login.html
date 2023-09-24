@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="/login.css">
+</head>
+
+<body>
+    <div id="con">
+        <h1>Login</h1>
+        <form name="form">
+            <input class="input" required type="text" name="login" placeholder="Login" size="20"><br><br>
+            <input class="input" required type="password" name="password" placeholder="Password" size="20"><br><br>
+            <input id="regButton" type="button" value="LOGIN" onclick="sendData()">
+            <p id="error"></p>
+            <a href="/registration">Registration</a>
+        </form>
+    </div>
+    <script>
+        function sendData() {
+            const login = document.form.login.value;
+            const password = document.form.password.value;
+
+            const body = JSON.stringify({
+                login: login,
+                password: password,
+            });
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/login");
+            xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+
+            xhr.onload = () => {
+                if (xhr.readyState == 4 && (xhr.status == 201 || xhr.status == 200)) {
+                    response = JSON.parse(xhr.response);
+                    console.log(response);
+                    if (response.status != "OK") {
+                        document.getElementById("error").innerHTML = response.message;
+                    } else {
+                        document.location.href = "/";
+                    }
+                } else {
+                    console.log(`Error: ${xhr.status}`);
+                }
+            };
+            xhr.send(body);
+        }
+    </script>
+</body>
+
+</html>
