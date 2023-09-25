@@ -12,6 +12,8 @@ const socketio = require('socket.io');
 
 const loginRouter = require('./loginRouter');
 const gameRouter = require('./gameRouter');
+const imageRouter = require('./imageRouter');
+const mainRouter = require('./mainRouter');
 
 const app = express();
 const server = http.createServer(app);
@@ -35,18 +37,8 @@ app.use(sessionMiddleware);
 io.engine.use(sessionMiddleware);
 app.use(loginRouter);
 app.use(gameRouter);
-
-app.get('/', (req, res) => {
-    // res.redirect('/login');
-    if (req.session.data == undefined) {
-        res.redirect('/login');
-    } else {
-        res.sendFile(__dirname + '/public/views/index.html');
-    }
-});
-app.post('/', (req, res) => {
-    res.send(JSON.stringify({login: req.session.data.login, role: req.session.data.role}));
-});
+app.use(imageRouter);
+app.use(mainRouter);
 
 //Game Socket Logic
 const rooms = [[null, null], [null, null]]
