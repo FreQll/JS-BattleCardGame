@@ -61,8 +61,8 @@ router.post('/registration', (req, res) => {
         res.send(JSON.stringify({ status: 'ERROR', message: err.message }));
     }
 });
-router.get('/register.css', (req, res) => {
-    res.sendFile(__dirname + '/public/styles/register.css');
+router.get('/autorization.css', (req, res) => {
+    res.sendFile(__dirname + '/public/styles/autorization.css');
 });
 
 module.exports = router;

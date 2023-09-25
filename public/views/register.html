@@ -1,59 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Signup</title>
+    <link rel="stylesheet" href="/autorization.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>registration</title>
-    <link rel="stylesheet" href="/register.css">
-</head>
-
-<body>
-    <div id="con">
-        <h1>Registration</h1>
-        <form name="form">
-            <input class="input" required type="text" name="login" placeholder="Login" size="20"><br><br>
-            <input class="input" required type="password" name="password" placeholder="Password" size="20"><br><br>
-            <input class="input" required type="password" name="confPass" placeholder="Confirm password" size="20"><br><br>
-            <input id="regButton" type="button" value="REGISTER" onclick="sendData()">
-            <p id="error"></p>
-            <a href="/login">Back to login page</a>
-        </form>
+  <body>
+    <div class="container">
+      <form name="form" class="form">
+        <h1>Sign up</h1>
+        <div class="form-section">
+          <input
+            class="input"
+            required
+            type="text"
+            name="login"
+            placeholder="Login"
+            size="20"
+          />
+        </div>
+        <div class="form-section">
+          <input
+            class="input"
+            required
+            type="password"
+            name="password"
+            placeholder="Password"
+            size="20"
+          />
+        </div>
+        <div class="form-section">
+          <input
+            class="input"
+            required
+            type="password"
+            name="confPass"
+            placeholder="Confirm password"
+            size="20"
+          />
+        </div>
+        <input
+          id="regButton"
+          type="button"
+          value="Sign Up"
+          onclick="sendData()"
+          class="button"
+        />
+        <p id="error"></p>
+        <span class="reminder">Already have an account? <a href="/login">Login</a></span>
+      </form>
     </div>
     <script>
-        function sendData() {
-            const login = document.form.login.value;
-            const password = document.form.password.value;
-            const confPass = document.form.confPass.value;
+      function sendData() {
+        const login = document.form.login.value;
+        const password = document.form.password.value;
+        const confPass = document.form.confPass.value;
 
-            if (password === confPass) {
-                const body = JSON.stringify({
-                    login: login,
-                    password: password,
-                });
+        if (password === confPass) {
+          const body = JSON.stringify({
+            login: login,
+            password: password,
+          });
 
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "/registration");
-                xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", "/registration");
+          xhr.setRequestHeader(
+            "Content-Type",
+            "application/json; charset=UTF-8"
+          );
 
-                xhr.onload = () => {
-                    if (xhr.readyState == 4 && (xhr.status == 201 || xhr.status == 200)) {
-                        response = JSON.parse(xhr.response);
-                        console.log(response);
-                        if (response.status === "OK") {
-                            document.location.href = "/";
-                        } else {
-                            document.getElementById("error").innerHTML = response.message;
-                        }
-                    } else {
-                        console.log(`Error: ${xhr.status}`);
-                    }
-                };
-                xhr.send(body);
+          xhr.onload = () => {
+            if (
+              xhr.readyState == 4 &&
+              (xhr.status == 201 || xhr.status == 200)
+            ) {
+              response = JSON.parse(xhr.response);
+              console.log(response);
+              if (response.status === "OK") {
+                document.location.href = "/";
+              } else {
+                document.getElementById("error").innerHTML = response.message;
+              }
             } else {
-                document.getElementById("error").innerHTML = "Passwords do not match";
+              console.log(`Error: ${xhr.status}`);
             }
+          };
+          xhr.send(body);
+        } else {
+          document.getElementById("error").innerHTML = "Passwords do not match";
         }
+      }
     </script>
-</body>
-
+  </body>
 </html>

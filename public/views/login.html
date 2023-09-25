@@ -1,53 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/autorization.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>login</title>
-    <link rel="stylesheet" href="/login.css">
-</head>
-
-<body>
-    <div id="con">
-        <h1>Login</h1>
-        <form name="form">
-            <input class="input" required type="text" name="login" placeholder="Login" size="20"><br><br>
-            <input class="input" required type="password" name="password" placeholder="Password" size="20"><br><br>
-            <input id="regButton" type="button" value="LOGIN" onclick="sendData()">
-            <p id="error"></p>
-            <a href="/registration">Registration</a>
-        </form>
+  <body>
+    <div class="container">
+      <form name="form" class="form">
+        <h1>Log in</h1>
+        <div class="form-section">
+          <input
+            class="input"
+            required
+            type="text"
+            name="login"
+            placeholder="Login"
+            size="20"
+          />
+        </div>
+        <div class="form-section">
+          <input
+            class="input"
+            required
+            type="password"
+            name="password"
+            placeholder="Password"
+            size="20"
+          />
+        </div>
+        <input
+          id="regButton"
+          type="button"
+          value="Log In"
+          onclick="sendData()"
+          class="button"
+        />
+        <p id="error"></p>
+        <span class="reminder"
+          >You don't have an account? <a href="/registration">Sign up</a></span
+        >
+      </form>
     </div>
     <script>
-        function sendData() {
-            const login = document.form.login.value;
-            const password = document.form.password.value;
+      function sendData() {
+        const login = document.form.login.value;
+        const password = document.form.password.value;
 
-            const body = JSON.stringify({
-                login: login,
-                password: password,
-            });
+        const body = JSON.stringify({
+          login: login,
+          password: password,
+        });
 
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/login");
-            xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/login");
+        xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 
-            xhr.onload = () => {
-                if (xhr.readyState == 4 && (xhr.status == 201 || xhr.status == 200)) {
-                    response = JSON.parse(xhr.response);
-                    console.log(response);
-                    if (response.status != "OK") {
-                        document.getElementById("error").innerHTML = response.message;
-                    } else {
-                        document.location.href = "/";
-                    }
-                } else {
-                    console.log(`Error: ${xhr.status}`);
-                }
-            };
-            xhr.send(body);
-        }
+        xhr.onload = () => {
+          if (xhr.readyState == 4 && (xhr.status == 201 || xhr.status == 200)) {
+            response = JSON.parse(xhr.response);
+            console.log(response);
+            if (response.status != "OK") {
+              document.getElementById("error").innerHTML = response.message;
+            } else {
+              document.location.href = "/";
+            }
+          } else {
+            console.log(`Error: ${xhr.status}`);
+          }
+        };
+        xhr.send(body);
+      }
     </script>
-</body>
-
+  </body>
 </html>
