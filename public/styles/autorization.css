@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #eb2e4a; /* !если кто то сможет найти более хорошую цветовую тему поменяйте пожалуйста) */
+    font-family: Marvel, sans-serif;
+    color: white;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.form-section {
+    font-size: 1.3rem;
+}
+
+.reminder {
+    color: #fccfd3;
+    font-size: 1.2rem;
+}
+
+a {
+    color: #841736;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.15s all ease-in-out;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #9a1738;
+}
+
+.input {
+    padding: 8px 25px;
+    text-align: center;
+    border-radius: 4px;
+    border: none
+}
+
+.input:focus {
+    outline: none;
+}
+
+.button {
+    padding: 8px 25px;
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    background-color: #841736;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.button:hover {
+    background-color: #b8183b;
+}
+
+.button:active {
+    background-color: #9a1738;
+}
+
+#error {
+    color: #490818;
+    font-size: 1.4rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
