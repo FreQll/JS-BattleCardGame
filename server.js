@@ -22,6 +22,7 @@ const io = socketio(server);
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('public'));
 
 server.listen(port, () => {
     console.log(`Server is listening on port ${port}`);

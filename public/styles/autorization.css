@@ -1,7 +1,6 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #eb2e4a; /* !если кто то сможет найти более хорошую цветовую тему поменяйте пожалуйста) */
     font-family: Marvel, sans-serif;
     color: white;
 }
@@ -9,7 +8,7 @@ body {
 h1 {
     font-size: 3rem;
     margin: 0;
-    margin-bottom: 10px;
+    color: #eeeeee;
 }
 
 .container {
@@ -20,12 +19,92 @@ h1 {
     min-height: 100vh;
 }
 
+.login-container {
+    position: relative;
+    border-radius: 17px;
+    box-shadow: 0px 0px 15px 13px rgba(0, 0, 0, 0.25) inset;
+    overflow: hidden;
+}
+
+.login-container::before {
+    content: "";
+    top: -20%;
+    left: 20%;
+    position: absolute;
+    width: 50%;
+    height: 140%;
+    background: linear-gradient(#ff0022, #1958fa);
+    animation: rotate 4s linear infinite;
+    z-index: -1;
+}
+
+.login-container::after {
+    content: "";
+    position: absolute;
+    border-radius: 17px;
+    top: -30%;
+    left: 20%;
+    background: linear-gradient(139deg, #682831 4.48%, #2E3C5F 97.58%);
+    inset: 3px;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #682831 50%, rgba(46,60,95,1) 50%);
+    position: absolute;
+    z-index: -2;
+}
+
+.main_images {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+.ironman, .venom {
+    position: absolute;
+    bottom: 0;
+    height: 80%;
+}
+
+.ironman {
+    left: 0;
+}
+
+.venom {
+    right: 0;
+}
+
 .form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 5px;
+    padding: 60px 50px;
+}
+
+input {
+    border: 1px solid;
+    background: #00000069;
+}
+
+.form > h1 {
+    margin-bottom: 30px;
 }
 
 .form-section {
@@ -35,19 +114,17 @@ h1 {
     justify-content: space-evenly;
     gap: 5px;
     margin-bottom: 15px;
-}
-
-.form-section {
     font-size: 1.3rem;
+    width: 100%;
 }
 
 .reminder {
-    color: #fccfd3;
+    color: #eeeeee;
     font-size: 1.2rem;
 }
 
 a {
-    color: #841736;
+    color: #f23952;
     text-decoration: none;
     font-weight: bold;
     transition: 0.15s all ease-in-out;
@@ -62,7 +139,9 @@ a:hover {
     padding: 8px 25px;
     text-align: center;
     border-radius: 4px;
-    border: none
+    border: none;
+    width: 80%;
+    color: #eeeeee;
 }
 
 .input:focus {
@@ -74,7 +153,7 @@ a:hover {
     width: 100%;
     border-radius: 4px;
     border: none;
-    background-color: #841736;
+    background-color: #f23952;
     color: white;
     font-weight: bold;
     font-size: 1.1rem;
@@ -91,7 +170,7 @@ a:hover {
 }
 
 #error {
-    color: #490818;
+    color: #f23952;
     font-size: 1.4rem;
     margin-top: 5px;
     margin-bottom: 5px;

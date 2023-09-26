@@ -14,40 +14,49 @@
 
   <body>
     <div class="container">
-      <form name="form" class="form">
-        <h1>Log in</h1>
-        <div class="form-section">
-          <input
-            class="input"
-            required
-            type="text"
-            name="login"
-            placeholder="Login"
-            size="20"
-          />
-        </div>
-        <div class="form-section">
-          <input
-            class="input"
-            required
-            type="password"
-            name="password"
-            placeholder="Password"
-            size="20"
-          />
-        </div>
-        <input
-          id="regButton"
-          type="button"
-          value="Log In"
-          onclick="sendData()"
-          class="button"
-        />
-        <p id="error"></p>
-        <span class="reminder"
-          >You don't have an account? <a href="/registration">Sign up</a></span
-        >
-      </form>
+      <div class="background"></div>
+      <div class="main_images">
+        <img class="ironman" src="/additional_icons/ironman.webp" alt="">
+        <img class="venom" src="/additional_icons/venom.webp" alt="">
+      </div>
+      <div class="login-box">
+        <div class="login-container">
+          <form name="form" class="form">
+            <h1>Log in</h1>
+            <div class="form-section">
+              <input
+                class="input"
+                required
+                type="text"
+                name="login"
+                placeholder="Login"
+                size="20"
+              />
+            </div>
+            <div class="form-section">
+              <input
+                class="input"
+                required
+                type="password"
+                name="password"
+                placeholder="Password"
+                size="20"
+              />
+            </div>
+            <input
+              id="regButton"
+              type="button"
+              value="Log In"
+              onclick="sendData()"
+              class="button"
+            />
+            <p id="error"></p>
+            <span class="reminder"
+              >You don't have an account? <a href="/registration">Sign up</a></span
+            >
+          </form>
+        <div>
+      </div>
     </div>
     <script>
       function sendData() {
