@@ -18,7 +18,9 @@ socket.on("opponent_connected", (data) => {
 
 socket.on("opponent_disconnected", () => {
   console.log("opponent_disconnected");
+  document.getElementById("game_board").style.display = "none";
   document.getElementById("opponent_disconnected").style.display = "block";
+  document.getElementById("loading-container").style.display = "block";
 });
 
 socket.on("disconnect", () => {
@@ -37,6 +39,8 @@ socket.on("err_not_enough_money", () => {
 
 socket.on("game_start", (data) => {
   console.log(`game_start: ${data.turn}`);
+  document.getElementById("game_board").style.display = "block";
+  document.getElementById("loading-container").style.display = "none";
 
   data.firstHand.forEach((element) => {
     const image = document.createElement("img");
