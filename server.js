@@ -89,8 +89,10 @@ io.on('connection', (socket) => {
     let timerI;
     let timerT;
     if(player_id === 1){
-        rooms[room_id][0].emit('opponent_connected', {login: socket.request.session.data.login});
-        socket.emit('opponent_connected', {login: rooms[room_id][0].request.session.data.login});
+        const myLogin = socket.request.session.data.login;
+        const opLogin = rooms[room_id][0].request.session.data.login;
+        socket.emit('opponent_connected', {myLogin: myLogin, opLogin: opLogin});
+        rooms[room_id][0].emit('opponent_connected', {myLogin: opLogin, opLogin: myLogin});
         timerT = setTimeout(() => {
             gameRoom(rooms[room_id][0], rooms[room_id][1], {timerI});
         }, 5000);

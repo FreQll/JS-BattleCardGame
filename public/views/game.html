@@ -7,22 +7,29 @@
   </head>
 
   <body>
-    <h1>Game test</h1>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/game.js"></script>
-    <div id="waiting_for_opponent" style="display: none">WAITING</div>
-    <div id="opponent_login" style="display: none">
-      Your opponent: <span id="opponent"></span>
+    <div class="loading-container">
+        <h1>Game test</h1>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/game.js"></script>
+        <div id="waiting_for_opponent" style="display: none">WAITING</div>
+        <div id="opponent_login" style="display: none">
+        Your opponent: <span id="opponent"></span>
+        </div>
+        <div id="opponent_disconnected" style="display: none">
+        Your opponent disconnected
+        <a href="/">Return to menu</a>
+        </div>
+        <div id="err_second_window" style="display: none">
+        ERROR You can play only one game
+        </div>
     </div>
-    <div id="enemy-cards"></div>
 
-    <div id="cards"></div>
-    <div id="opponent_disconnected" style="display: none">
-      Your opponent disconnected
-      <a href="/">Return to menu</a>
-    </div>
-    <div id="err_second_window" style="display: none">
-      ERROR You can play only one game
+    <div class="game_board">
+        <div id="timer"></div>
+        <div id="enemy-cards"></div>
+        <div id="turn_nickname"></div>
+        <button id="pass_btn" onclick="passOnClick()">Pass</button>
+        <div id="cards"></div>
     </div>
   </body>
 </html>

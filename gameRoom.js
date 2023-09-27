@@ -28,6 +28,7 @@ async function gameRoom(firstSocket, secondSocket, {timerID}) {
     let timer = turnTime;
     let firstHand = [];
     let secondHand = [];
+
     for (let i = 0; i < 6; i++) {
       const firstCard = await array();
       firstHand.push(firstCard[randomIntFromInterval(0, firstCard.length - 1)]);
@@ -37,8 +38,13 @@ async function gameRoom(firstSocket, secondSocket, {timerID}) {
       secondHand.push(secondCard[randomIntFromInterval(0, secondCard.length - 1)]);
       secondCard.splice(secondCard.indexOf(secondHand[i]), 1);
     }
+
     firstSocket.emit('game_start', {turn: turn, cards: array, firstHand: firstHand, secondHand: secondHand});
-    secondSocket.emit('game_start', {turn: !turn, cards: array, firstHand: firstHand, secondHand: secondHand});
+    secondSocket.emit('game_start', {turn: !turn, cards: array, firstHand: secondHand, secondHand: firstHand});
+
+    firstSocket.emit('turn', {turn: turn});
+    secondSocket.emit('turn', {turn: !turn});
+
     timerID = setInterval(() => {
         firstSocket.emit('timer', {timer: timer});
         secondSocket.emit('timer', {timer: timer});
@@ -52,23 +58,29 @@ async function gameRoom(firstSocket, secondSocket, {timerID}) {
             timer--;
         }
     }, 1000);
+
+    function nextTurn() {
+      firstSocket.emit('timer', {timer: timer});
+      secondSocket.emit('timer', {timer: timer});
+
+      turn = !turn;
+      firstSocket.emit('turn', {turn: turn});
+      secondSocket.emit('turn', {turn: !turn});
+      timer = turnTime;
+    }
+
     firstSocket.on('next_turn', () => {
-        if(!turn){
+        if (!turn) {
             return;
         }
-        turn = !turn;
-        firstSocket.emit('turn', {turn: turn});
-        secondSocket.emit('turn', {turn: !turn});
-        timer = turnTime;
+        nextTurn();
     });
+
     secondSocket.on('next_turn', () => {
         if(turn){
             return;
         }
-        turn = !turn;
-        firstSocket.emit('turn', {turn: turn});
-        secondSocket.emit('turn', {turn: !turn});
-        timer = turnTime;
+        nextTurn();
     });
 }
 module.exports = gameRoom;
