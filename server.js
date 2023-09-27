@@ -102,26 +102,28 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         let room_id = socket.request.session.data.room_id;
         let player_id = socket.request.session.data.player_id;
-        if (rooms[room_id][1] !== null) {
-            if (rooms[room_id][1].request.session.data.timerI !== undefined) {
-                console.log('clearing interval');
-                clearInterval(rooms[room_id][1].request.session.data.timerI);
-                rooms[room_id][1].request.session.data.timerI = undefined;
+        if (rooms[room_id][player_id] !== null) {
+            if (rooms[room_id][1] !== null) {
+                if (rooms[room_id][1].request.session.data.timerI !== undefined) {
+                    console.log('clearing interval');
+                    clearInterval(rooms[room_id][1].request.session.data.timerI);
+                    rooms[room_id][1].request.session.data.timerI = undefined;
+                }
+                if (rooms[room_id][1].request.session.data.timerT !== undefined) {
+                    console.log('clearing timeout');
+                    clearTimeout(rooms[room_id][1].request.session.data.timerT);
+                    rooms[room_id][1].request.session.data.timerT = undefined;
+                }
             }
-            if (rooms[room_id][1].request.session.data.timerT !== undefined) {
-                console.log('clearing timeout');
-                clearTimeout(rooms[room_id][1].request.session.data.timerT);
-                rooms[room_id][1].request.session.data.timerT = undefined;
+            let opponent_id = (player_id + 1) % 2;
+            if (rooms[room_id][opponent_id] != null) {
+                console.log(`sending opponent_disconnected to ${rooms[room_id][opponent_id].request.session.data.login}`);
+                rooms[room_id][opponent_id].emit('opponent_disconnected');
             }
+            rooms[room_id][0] = null;
+            rooms[room_id][1] = null;
         }
         players.splice(players.indexOf(socket), 1);
-        let opponent_id = (player_id + 1) % 2;
-        if (rooms[room_id][opponent_id] != null) {
-            console.log(`sending opponent_disconnected to ${rooms[room_id][opponent_id].request.session.data.login}`);
-            rooms[room_id][opponent_id].emit('opponent_disconnected');
-        }
-        rooms[room_id][0] = null;
-        rooms[room_id][1] = null;
         console.log(`Disconnected: ${socket.request.session.data.login} Room: ${room_id} Player: ${player_id}`);
     });
     socket.request.session.data.room_id = room_id;
