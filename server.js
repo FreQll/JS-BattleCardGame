@@ -101,11 +101,11 @@ io.on('connection', (socket) => {
         socket.emit('waiting_for_opponent');
     }
     socket.on('disconnect', () => {
-        if(rooms[room_id][1].request.session.data.timerI !== undefined) {
-            clearInterval(rooms[room_id][1].request.session.data.timerI);
-            clearTimeout(rooms[room_id][1].request.session.data.timerT);
-            rooms[room_id][1].request.session.data.timerI = undefined;
-            rooms[room_id][1].request.session.data.timerT = undefined;
+        if(socket.request.session.data.timerI !== undefined) {
+            clearInterval(socket.request.session.data.timerI);
+            clearTimeout(socket.request.session.data.timerT);
+            socket.request.session.data.timerI = undefined;
+            socket.request.session.data.timerT = undefined;
         }
         players.splice(players.indexOf(socket), 1);
         let opponent_id = (player_id + 1) % 2;

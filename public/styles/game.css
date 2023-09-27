@@ -1,0 +1,12 @@
+#cards, #enemy-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+}
+
+#cards > img, #enemy-cards > img {
+    width: 180px;
+}
