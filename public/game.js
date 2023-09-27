@@ -58,6 +58,7 @@ socket.on("game_start", (data) => {
 
 socket.on("timer", (data) => {
     document.getElementById("timer").innerText = data.timer;
+    console.log(`timer: ${data.timer}`);
 });
 
 socket.on("turn", (data) => {

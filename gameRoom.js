@@ -22,7 +22,7 @@ async function getCards() {
   }
 
 
-async function gameRoom(firstSocket, secondSocket, {timerID}) {
+async function gameRoom(firstSocket, secondSocket) {
 
     let turn = true;
     let timer = turnTime;
@@ -45,7 +45,7 @@ async function gameRoom(firstSocket, secondSocket, {timerID}) {
     firstSocket.emit('turn', {turn: turn});
     secondSocket.emit('turn', {turn: !turn});
 
-    timerID = setInterval(() => {
+    let timerI = setInterval(() => {
         firstSocket.emit('timer', {timer: timer});
         secondSocket.emit('timer', {timer: timer});
         if(timer === 0){
@@ -58,7 +58,7 @@ async function gameRoom(firstSocket, secondSocket, {timerID}) {
             timer--;
         }
     }, 1000);
-
+    secondSocket.request.session.data.timerI = timerI;
     function nextTurn() {
       firstSocket.emit('timer', {timer: timer});
       secondSocket.emit('timer', {timer: timer});
