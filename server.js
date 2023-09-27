@@ -10,6 +10,8 @@ const path = require('path');
 const http = require('http');
 const socketio = require('socket.io');
 
+const gameRoom = require('./gameRoom');
+
 const loginRouter = require('./loginRouter');
 const gameRouter = require('./gameRouter');
 const imageRouter = require('./imageRouter');
@@ -20,6 +22,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const bodyParser = require('body-parser');
+const e = require('express');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
@@ -42,8 +45,9 @@ app.use(imageRouter);
 app.use(mainRouter);
 
 //Game Socket Logic
-const rooms = [[null, null], [null, null]]
+const rooms = [[null, null], [null, null]];
 const players = [];
+
 
 io.on('connection', (socket) => {
     if(socket.request.session.data === undefined){
@@ -82,14 +86,27 @@ io.on('connection', (socket) => {
         room_id = rooms.length - 1;
         player_id = 0;
     }
+    let timerI;
+    let timerT;
     if(player_id === 1){
         rooms[room_id][0].emit('opponent_connected', {login: socket.request.session.data.login});
         socket.emit('opponent_connected', {login: rooms[room_id][0].request.session.data.login});
+        timerT = setTimeout(() => {
+            gameRoom(rooms[room_id][0], rooms[room_id][1], {timerI});
+        }, 5000);
+        socket.request.session.data.timerI = timerI;
+        socket.request.session.data.timerT = timerT;
     }
     else{
         socket.emit('waiting_for_opponent');
     }
     socket.on('disconnect', () => {
+        if(rooms[room_id][1].request.session.data.timerI !== undefined) {
+            clearInterval(rooms[room_id][1].request.session.data.timerI);
+            clearTimeout(rooms[room_id][1].request.session.data.timerT);
+            rooms[room_id][1].request.session.data.timerI = undefined;
+            rooms[room_id][1].request.session.data.timerT = undefined;
+        }
         players.splice(players.indexOf(socket), 1);
         let opponent_id = (player_id + 1) % 2;
         if(rooms[room_id][opponent_id] != null){
@@ -102,3 +119,7 @@ io.on('connection', (socket) => {
     });
     console.log(`New connection: ${socket.request.session.data.login} Room: ${room_id} Player: ${player_id}`);
 });
+// 1 Меню
+// 2 logaut
+// 3 отрисовка карт
+// 4 механіка таймера

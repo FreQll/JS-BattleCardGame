@@ -21,3 +21,15 @@ socket.on('err_second_window', () => {
     console.log('err_second_window');
     document.getElementById('err_second_window').style.display = 'block';
 });
+socket.on('err_not_enough_money', () => {
+    console.log('err_not_enough_money');
+    document.getElementById('err_not_enough_money').style.display = 'block';
+});
+socket.on('game_start', () => {
+});
+socket.on('timer', (data) => {
+});
+socket.on('turn', (data) => {
+});
+//socket.emit('next_turn');
+
