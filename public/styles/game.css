@@ -10,3 +10,10 @@
 #cards > img, #enemy-cards > img {
     width: 180px;
 }
+
+#enemy-portrait, #my-portrait {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+}
