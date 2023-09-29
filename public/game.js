@@ -124,6 +124,7 @@ socket.on("play_card", (data) => {
 const renderCard = (card) => {
   const image = document.createElement("img");
   image.src = card.src;
+  image.classList.add('card');
   image.addEventListener("click", (event) => {
     if (myMana < card.cost || !turn) {
       return;
@@ -141,3 +142,17 @@ const renderCardBack = () => {
   image.src = "/images/card-back.png";
   document.getElementById("enemy-cards").appendChild(image);
 };
+
+socket.on("game_over", (data) => {
+  document.getElementById("game_over").style.display = "block";
+
+  document.getElementById("game_over").style.display = "block";
+
+  document.querySelector("body").style.overflow = 'hidden'
+
+  if (data.winner) {
+    document.getElementById("game_over_message").innerText = "You win";
+  } else {
+    document.getElementById("game_over_message").innerText = "You lose";
+  }
+})

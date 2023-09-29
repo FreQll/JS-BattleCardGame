@@ -1,5 +1,5 @@
-const turnTime = 10;
-const hp = 25;
+const turnTime = 15;
+const hp = 20;
 const cardsData = async () => await getCards();
 const array = async () =>
   await [...(await cardsData()).cards, ...(await cardsData()).cards];
@@ -87,7 +87,9 @@ async function gameRoom(firstSocket, secondSocket) {
       timer--;
     }
   }, 1000);
+
   secondSocket.request.session.data.timerI = timerI;
+
   function nextTurn() {
     firstSocket.emit("timer", { timer: timer });
     secondSocket.emit("timer", { timer: timer });
@@ -96,16 +98,20 @@ async function gameRoom(firstSocket, secondSocket) {
       if (turn) {
         secondManaLimit++;
         secondMana = secondManaLimit;
-
-        secondHand.push(cardArray[randomIntFromInterval(0, cardArray.length - 1)]);
-        cardArray.splice(cardArray.indexOf(secondHand[secondHand.length]), 1);
       } else {
         firstManaLimit++;
         firstMana = firstManaLimit;
-
-        firstHand.push(cardArray[randomIntFromInterval(0, cardArray.length - 1)]);
-        cardArray.splice(cardArray.indexOf(firstHand[firstHand.length]), 1);
       }
+    }
+
+    if (turn && secondHand.length < 10) {
+      secondHand.push(
+        cardArray[randomIntFromInterval(0, cardArray.length - 1)]
+      );
+      cardArray.splice(cardArray.indexOf(secondHand[secondHand.length]), 1);
+    } else if (!turn && firstHand.length < 10) {
+      firstHand.push(cardArray[randomIntFromInterval(0, cardArray.length - 1)]);
+      cardArray.splice(cardArray.indexOf(firstHand[firstHand.length]), 1);
     }
 
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
@@ -160,9 +166,13 @@ async function gameRoom(firstSocket, secondSocket) {
       enemyHp -= data.attack;
     }
 
-    // if (enemyHp <= 0) {
-    //   socket.emit("game_over", { winner: myLogin });
-    // }
+    if (enemyHp <= 0) {
+      clearInterval(firstSocket.request.session.data.timerI);
+      clearInterval(secondSocket.request.session.data.timerI);
+
+      firstSocket.emit("game_over", { winner: true });
+      secondSocket.emit("game_over", { winner: false });
+    }
 
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
     secondSocket.emit("mana", { firstMana: secondMana, secondMana: firstMana });
