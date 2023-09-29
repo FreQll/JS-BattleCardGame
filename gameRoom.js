@@ -34,17 +34,14 @@ async function gameRoom(firstSocket, secondSocket) {
   let myHp = hp;
   let firstManaLimit = 1;
   let secondManaLimit = 1;
+  const cardArray = await array();
 
   for (let i = 0; i < 6; i++) {
-    const firstCard = await array();
-    firstHand.push(firstCard[randomIntFromInterval(0, firstCard.length - 1)]);
-    firstCard.splice(firstCard.indexOf(firstHand[i]), 1);
+    firstHand.push(cardArray[randomIntFromInterval(0, cardArray.length - 1)]);
+    cardArray.splice(cardArray.indexOf(firstHand[i]), 1);
 
-    const secondCard = await array();
-    secondHand.push(
-      secondCard[randomIntFromInterval(0, secondCard.length - 1)]
-    );
-    secondCard.splice(secondCard.indexOf(secondHand[i]), 1);
+    secondHand.push(cardArray[randomIntFromInterval(0, cardArray.length - 1)]);
+    cardArray.splice(cardArray.indexOf(secondHand[i]), 1);
   }
 
   firstSocket.emit("game_start", {
@@ -97,11 +94,10 @@ async function gameRoom(firstSocket, secondSocket) {
       if (turn) {
         secondManaLimit++;
         secondMana = secondManaLimit;
-      }
-      else {
+      } else {
         firstManaLimit++;
         firstMana = firstManaLimit;
-      };
+      }
     }
 
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
@@ -125,7 +121,7 @@ async function gameRoom(firstSocket, secondSocket) {
     if (!turn) {
       return;
     }
-    console.log(firstMana);
+    //console.log(firstMana);
     nextTurn();
   });
 
@@ -133,7 +129,7 @@ async function gameRoom(firstSocket, secondSocket) {
     if (turn) {
       return;
     }
-    console.log(secondMana);
+    //console.log(secondMana);
     nextTurn();
   });
 
@@ -145,10 +141,23 @@ async function gameRoom(firstSocket, secondSocket) {
       return;
     }
     firstMana -= data.cost;
+    if (data.attack < 0) {
+      myHp + Math.abs(data.attack) >= 25
+        ? (myHp = 25)
+        : (myHp += Math.abs(data.attack));
+    } else {
+      enemyHp -= data.attack;
+    }
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
     secondSocket.emit("mana", { firstMana: secondMana, secondMana: firstMana });
+    firstSocket.emit("hp", { myHp: myHp, enemyHp: enemyHp });
+    secondSocket.emit("hp", { myHp: enemyHp, enemyHp: myHp });
     firstHand.splice(firstHand.indexOf(data), 1);
-    secondSocket.emit("play_card", firstHand);
+    secondSocket.emit("play_card", {
+      cards: firstHand,
+      myHp: myHp,
+      enemyHp: enemyHp,
+    });
   });
 
   secondSocket.on("play_card", (data) => {
@@ -158,11 +167,24 @@ async function gameRoom(firstSocket, secondSocket) {
     if (secondMana < data.cost) {
       return;
     }
+    if (data.attack < 0) {
+      enemyHp + Math.abs(data.attack) >= 25
+        ? (enemyHp = 25)
+        : (enemyHp += Math.abs(data.attack));
+    } else {
+      myHp -= data.attack;
+    }
     secondMana -= data.cost;
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
     secondSocket.emit("mana", { firstMana: secondMana, secondMana: firstMana });
+    firstSocket.emit("hp", { myHp: myHp, enemyHp: enemyHp });
+    secondSocket.emit("hp", { myHp: enemyHp, enemyHp: myHp });
     secondHand.splice(secondHand.indexOf(data), 1);
-    firstSocket.emit("play_card", secondHand);
+    firstSocket.emit("play_card", {
+      cards: secondHand,
+      myHp: enemyHp,
+      enemyHp: myHp,
+    });
   });
 }
 module.exports = gameRoom;

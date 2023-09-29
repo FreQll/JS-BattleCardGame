@@ -55,8 +55,8 @@ socket.on("game_start", (data) => {
   document.getElementById("enemy-name").innerText = opLogin;
   document.getElementById("my-name").innerText = myLogin;
 
-  document.getElementById("enemy-portrait").src = "/avatar/" + opLogin + ".jpg"
-  document.getElementById("my-portrait").src = "/avatar/" + myLogin + ".jpg"
+  document.getElementById("enemy-portrait").src = "/avatar/" + opLogin + ".jpg";
+  document.getElementById("my-portrait").src = "/avatar/" + myLogin + ".jpg";
 
   document.getElementById("enemy-hp").innerText = data.enemyHp + " HP";
   document.getElementById("my-hp").innerText = data.myHp + " HP";
@@ -73,12 +73,10 @@ socket.on("turn", (data) => {
     document.getElementById("turn_nickname").innerText = myLogin + " turn";
     document.getElementById("enemy-mana").innerText = data.secondMana + " Mana";
     document.getElementById("my-mana").innerText = data.firstMana + " Mana";
-    
   } else {
     document.getElementById("turn_nickname").innerText = opLogin + " turn";
     document.getElementById("enemy-mana").innerText = data.secondMana + " Mana";
     document.getElementById("my-mana").innerText = data.firstMana + " Mana";
-    
   }
 });
 
@@ -88,43 +86,43 @@ socket.on("mana", (data) => {
   document.getElementById("enemy-mana").innerText = data.secondMana + " Mana";
 });
 
+socket.on("hp", (data) => {
+  document.getElementById("my-hp").innerText = data.myHp + " HP`s";
+  document.getElementById("enemy-hp").innerText = data.enemyHp + " HP`s";
+});
+
 function passOnClick() {
   socket.emit("next_turn");
 }
 
 const playCard = (card) => {
-  
   socket.emit("play_card", card);
-  
-}
+};
 
 socket.on("play_card", (data) => {
   document.getElementById("enemy-cards").innerHTML = "";
-  data.forEach(() => {
+  data.cards.forEach(() => {
     renderCardBack();
   });
 });
 
 const renderCard = (card) => {
   const image = document.createElement("img");
-  console.log(card);
   image.src = card.src;
   image.addEventListener("click", (event) => {
-    console.log(myMana + " " + card.cost)
     if (myMana < card.cost) {
       return;
-    }
-    else {  
+    } else {
       //! animation for playing card
       playCard(card);
       event.currentTarget.remove();
     }
   });
   document.getElementById("cards").appendChild(image);
-}
+};
 
 const renderCardBack = () => {
   const image = document.createElement("img");
   image.src = "/images/card-back.png";
   document.getElementById("enemy-cards").appendChild(image);
-}
+};
