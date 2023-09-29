@@ -4,6 +4,7 @@ let myLogin = "";
 let opLogin = "";
 let timer;
 let myMana;
+turn = false;
 
 socket.on("waiting_for_opponent", () => {
   document.getElementById("waiting_for_opponent").style.display = "block";
@@ -39,7 +40,7 @@ socket.on("err_not_enough_money", () => {
 });
 
 socket.on("game_start", (data) => {
-  console.log(`game_start: ${data.turn}`);
+  turn = data.turn;
   myMana = data.firstMana;
   document.getElementById("game_board").style.display = "block";
   document.getElementById("loading-container").style.display = "none";
@@ -69,6 +70,7 @@ socket.on("timer", (data) => {
 });
 
 socket.on("turn", (data) => {
+  turn = data.turn;
   if (data.turn) {
     document.getElementById("turn_nickname").innerText = myLogin + " turn";
     document.getElementById("enemy-mana").innerText = data.secondMana + " Mana";
@@ -110,7 +112,7 @@ const renderCard = (card) => {
   const image = document.createElement("img");
   image.src = card.src;
   image.addEventListener("click", (event) => {
-    if (myMana < card.cost) {
+    if (myMana < card.cost || !turn) {
       return;
     } else {
       //! animation for playing card
