@@ -53,6 +53,7 @@ async function gameRoom(firstSocket, secondSocket) {
     enemyHp: enemyHp,
     firstMana: firstMana,
     secondMana: secondMana,
+    deck_length: cardArray.length,
   });
   secondSocket.emit("game_start", {
     turn: !turn,
@@ -63,6 +64,7 @@ async function gameRoom(firstSocket, secondSocket) {
     enemyHp: myHp,
     firstMana: secondMana,
     secondMana: firstMana,
+    deck_length: cardArray.length,
   });
 
   firstSocket.emit("turn", {
@@ -94,14 +96,22 @@ async function gameRoom(firstSocket, secondSocket) {
       if (turn) {
         secondManaLimit++;
         secondMana = secondManaLimit;
+
+        secondHand.push(cardArray[randomIntFromInterval(0, cardArray.length - 1)]);
+        cardArray.splice(cardArray.indexOf(secondHand[secondHand.length]), 1);
       } else {
         firstManaLimit++;
         firstMana = firstManaLimit;
+
+        firstHand.push(cardArray[randomIntFromInterval(0, cardArray.length - 1)]);
+        cardArray.splice(cardArray.indexOf(firstHand[firstHand.length]), 1);
       }
     }
 
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
     secondSocket.emit("mana", { firstMana: secondMana, secondMana: firstMana });
+    firstSocket.emit("take_card", { myHand:  firstHand, enemyHand: secondHand, deck_length: cardArray.length });
+    secondSocket.emit("take_card", { myHand: secondHand, enemyHand: firstHand, deck_length: cardArray.length });
 
     turn = !turn;
     firstSocket.emit("turn", {
@@ -140,7 +150,8 @@ async function gameRoom(firstSocket, secondSocket) {
     if (firstMana < data.cost) {
       return;
     }
-    firstMana -= data.cost;
+    firstMana -= data.cost; 
+    //attack logic
     if (data.attack < 0) {
       myHp + Math.abs(data.attack) >= 25
         ? (myHp = 25)
@@ -148,6 +159,11 @@ async function gameRoom(firstSocket, secondSocket) {
     } else {
       enemyHp -= data.attack;
     }
+
+    // if (enemyHp <= 0) {
+    //   socket.emit("game_over", { winner: myLogin });
+    // }
+
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
     secondSocket.emit("mana", { firstMana: secondMana, secondMana: firstMana });
     firstSocket.emit("hp", { myHp: myHp, enemyHp: enemyHp });
@@ -167,6 +183,7 @@ async function gameRoom(firstSocket, secondSocket) {
     if (secondMana < data.cost) {
       return;
     }
+    //attack logic
     if (data.attack < 0) {
       enemyHp + Math.abs(data.attack) >= 25
         ? (enemyHp = 25)
@@ -174,6 +191,7 @@ async function gameRoom(firstSocket, secondSocket) {
     } else {
       myHp -= data.attack;
     }
+
     secondMana -= data.cost;
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
     secondSocket.emit("mana", { firstMana: secondMana, secondMana: firstMana });

@@ -93,7 +93,7 @@ io.on('connection', (socket) => {
         rooms[room_id][0].emit('opponent_connected', { myLogin: opLogin, opLogin: myLogin });
         let timerT = setTimeout(() => {
             gameRoom(rooms[room_id][0], rooms[room_id][1]);
-        }, 5000);
+        }, 1000);
         socket.request.session.data.timerT = timerT;
     }
     else {

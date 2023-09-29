@@ -44,6 +44,7 @@ socket.on("game_start", (data) => {
   myMana = data.firstMana;
   document.getElementById("game_board").style.display = "block";
   document.getElementById("loading-container").style.display = "none";
+  document.getElementById("card-deck").setAttribute("title", data.deck_length + " cards left");
 
   data.firstHand.forEach((element) => {
     renderCard(element); //! Нужно пофиксить, игрок вне своего хода может кидать карту если хватает маны
@@ -59,8 +60,8 @@ socket.on("game_start", (data) => {
   document.getElementById("enemy-portrait").src = "/avatar/" + opLogin + ".jpg";
   document.getElementById("my-portrait").src = "/avatar/" + myLogin + ".jpg";
 
-  document.getElementById("enemy-hp").innerText = data.enemyHp + " HP";
-  document.getElementById("my-hp").innerText = data.myHp + " HP";
+  document.getElementById("enemy-hp").innerText = data.enemyHp;
+  document.getElementById("my-hp").innerText = data.myHp;
   document.getElementById("enemy-mana").innerText = data.secondMana + " Mana";
   document.getElementById("my-mana").innerText = data.firstMana + " Mana";
 });
@@ -89,9 +90,21 @@ socket.on("mana", (data) => {
 });
 
 socket.on("hp", (data) => {
-  document.getElementById("my-hp").innerText = data.myHp + " HP`s";
-  document.getElementById("enemy-hp").innerText = data.enemyHp + " HP`s";
+  document.getElementById("my-hp").innerText = data.myHp;
+  document.getElementById("enemy-hp").innerText = data.enemyHp;
 });
+
+socket.on("take_card", (data) => {
+  document.getElementById("cards").innerHTML = "";
+  document.getElementById("enemy-cards").innerHTML = "";
+  document.getElementById("card-deck").setAttribute("title", data.deck_length + " cards left");
+  data.myHand.forEach((element) => {
+    renderCard(element);
+  });
+  data.enemyHand.forEach(() => {
+    renderCardBack();
+  });
+})
 
 function passOnClick() {
   socket.emit("next_turn");

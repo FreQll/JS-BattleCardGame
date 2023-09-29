@@ -7,7 +7,7 @@
     background-color: green;
 }
 
-#cards > img, #enemy-cards > img {
+#cards > img, #enemy-cards > img, #card-deck {
     width: 180px;
 }
 
