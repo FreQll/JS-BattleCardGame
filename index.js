@@ -17,6 +17,7 @@ const gameRouter = require('./gameRouter');
 const imageRouter = require('./imageRouter');
 const mainRouter = require('./mainRouter');
 const settingsRouter = require('./settingsRouter');
+const howToPlayRouter = require('./howToPlayRouter');
 
 const app = express();
 const server = http.createServer(app);
@@ -45,6 +46,7 @@ app.use(gameRouter);
 app.use(imageRouter);
 app.use(mainRouter);
 app.use(settingsRouter);
+app.use(howToPlayRouter);
 
 //Game Socket Logic
 const rooms = [[null, null], [null, null]];
