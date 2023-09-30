@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marvel Card Masters - Settings</title>
+    <link rel="stylesheet" href="/settings.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="wrapper">
+      <form action="/logout" method="POST">
+        <button class="button" type="submit">Logout</button>
+      </form>
+      <a class="goBack" href="/"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+          /></svg
+      ></a>
+      <div class="container">
+        <h1>Settings</h1>
+        <div class="avatar">
+          <img id="user_avatar" alt="img" />
+          <div>Your current avatar</div>
+        </div>
+
+        <form
+          action="/update"
+          method="POST"
+          enctype="multipart/form-data"
+          class="upload-form"
+        >
+          <input type="file" name="image" />
+          <p>Drag your files here or click in this area.</p>
+          <button type="submit">Update avatar</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="/settings.js"></script>
+  </body>
+</html>
