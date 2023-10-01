@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-const config = require("../config.json");
+const config = require("../server/config.json");
 const db = mysql.createConnection({
     host: config.host,
     user: config.user,
@@ -15,7 +15,6 @@ class Model {
                 if(err){
                     reject(err);
                 }
-                console.log("INFO" + results);
                 resolve(results);
             });
         });

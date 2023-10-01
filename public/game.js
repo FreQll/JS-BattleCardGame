@@ -22,7 +22,6 @@ socket.on("opponent_connected", (data) => {
 
 socket.on("opponent_disconnected", () => {
   document.querySelector("body").classList.add("background");
-  console.log("opponent_disconnected");
   document.getElementById("game_board").style.display = "none";
   document.getElementById("opponent_disconnected").style.display = "block";
   document.getElementById("loading-container").style.display = "block";
@@ -34,14 +33,12 @@ socket.on("disconnect", () => {
 });
 
 socket.on("err_second_window", () => {
-  console.log("err_second_window");
   document.querySelector("body").classList.add("background");
   document.getElementById("err_second_window").style.display = "block";
 });
 
 socket.on("err_not_enough_money", () => {
   document.querySelector("body").classList.add("background");
-  console.log("err_not_enough_money");
   document.getElementById("err_not_enough_money").style.display = "block";
 });
 
@@ -140,7 +137,6 @@ const renderCard = (card) => {
       return;
     } else {
       //! animation for playing card
-      console.log("1");
       playCard(card);
       event.currentTarget.remove();
     }

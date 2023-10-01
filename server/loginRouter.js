@@ -1,9 +1,9 @@
 const express = require('express');
-const User = require('./models/user');
+const User = require('../models/user');
 const router = express.Router();
 
 router.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/public/views/login.html');
+    res.sendFile(process.cwd() + '/public/views/login.html');
 });
 router.post('/login', (req, res) => {
     try {
@@ -31,10 +31,9 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/registration', (req, res) => {
-    res.sendFile(__dirname + '/public/views/register.html');
+    res.sendFile(process.cwd() + '/public/views/register.html');
 });
 router.post('/registration', (req, res) => {
-    console.log(req.body);
     try {
         if (req.body.login === '' || req.body.password === '') {
             throw new Error('All fields must be filled!');
@@ -59,7 +58,7 @@ router.post('/registration', (req, res) => {
     }
 });
 router.get('/autorization.css', (req, res) => {
-    res.sendFile(__dirname + '/public/styles/autorization.css');
+    res.sendFile(process.cwd() + '/public/styles/autorization.css');
 });
 
 module.exports = router;

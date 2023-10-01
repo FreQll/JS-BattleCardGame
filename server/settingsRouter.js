@@ -5,7 +5,7 @@ router.get("/settings", (req, res) => {
   if (req.session.data == undefined) {
     res.redirect("/login");
   } else {
-    res.sendFile(__dirname + "/public/views/settings.html");
+    res.sendFile(process.cwd() + "/public/views/settings.html");
   }
 });
 
@@ -14,11 +14,11 @@ router.post("/settings", (req, res) => {
 });
 
 router.get("/settings.css", (req, res) => {
-  res.sendFile(__dirname + "/public/styles/settings.css");
+  res.sendFile(process.cwd() + "/public/styles/settings.css");
 });
 
 router.get("/settings.js", (req, res) => {
-  res.sendFile(__dirname + "/public/settings.js");
+  res.sendFile(process.cwd() + "/public/settings.js");
 });
 
 router.post("/logout", (req, res) => {

@@ -1,5 +1,5 @@
-const turnTime = 15;
-const hp = 5;
+const turnTime = 30;
+const hp = 20;
 const cardsData = async () => await getCards();
 
 const array = async () =>
@@ -20,7 +20,7 @@ async function getCards() {
     const cardData = await response.json();
     return cardData;
   } catch (error) {
-    console.error("Error fetching JSON:", error);
+    //console.error("Error fetching JSON:", error);
   }
 }
 
@@ -171,7 +171,7 @@ async function gameRoom(firstSocket, secondSocket) {
       enemyHp -= data.attack;
     }
 
-    console.log(enemyHp);
+    //console.log(enemyHp);
 
     if (enemyHp <= 0) {
       clearInterval(firstSocket.request.session.data.timerI);
