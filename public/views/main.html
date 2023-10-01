@@ -1,22 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Marvel Card Masters - Lobby</title>
     <link rel="stylesheet" href="/main.css" />
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-    <div id="con">
-        <h1>Lobby</h1>
-        <img id="user_avatar" alt="img">
-        <h2>Login: <span id="login"></span></h2>
-        <a href="/game">PLAY</a>
-        <a href="/settings">SETTINGS</a>
-        <a href="/howToPlay">How to Play</a>
+  <body>
+    <div class="background">
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+    <div class="wrapper">
+      <div id="con" class="container">
+        <div>
+          <h1>Lobby</h1>
+          <img id="user_avatar" alt="img" />
+          <h2>Login: <span id="login"></span></h2>
+        </div>
+        <form action="/game" method="get">
+          <button class="button-play" type="submit">
+            <div class="play-div">Play</div>
+          </button>
+        </form>
+        <form action="/settings" method="get">
+          <button class="button" type="submit">
+            <div class="button-div">Settings</div>
+          </button>
+        </form>
+        <form action="/howToPlay" method="get">
+          <button class="button" type="submit">
+            <div class="button-div">How to Play</div>
+          </button>
+        </form>
+      </div>
     </div>
     <script src="/main.js"></script>
-</body>
-
+  </body>
 </html>

@@ -8,17 +8,20 @@ turn = false;
 
 socket.on("waiting_for_opponent", () => {
   document.getElementById("waiting_for_opponent").style.display = "block";
+  document.querySelector("body").classList.add("background");
 });
 
 socket.on("opponent_connected", (data) => {
   opLogin = data.opLogin;
   myLogin = data.myLogin;
+  document.querySelector("body").classList.add("background");
   document.getElementById("waiting_for_opponent").style.display = "none";
   document.getElementById("opponent_login").style.display = "block";
   document.getElementById("opponent").textContent = opLogin;
 });
 
 socket.on("opponent_disconnected", () => {
+  document.querySelector("body").classList.add("background");
   console.log("opponent_disconnected");
   document.getElementById("game_board").style.display = "none";
   document.getElementById("opponent_disconnected").style.display = "block";
@@ -26,15 +29,18 @@ socket.on("opponent_disconnected", () => {
 });
 
 socket.on("disconnect", () => {
+  document.querySelector("body").classList.add("background");
   document.location.href = "/login";
 });
 
 socket.on("err_second_window", () => {
   console.log("err_second_window");
+  document.querySelector("body").classList.add("background");
   document.getElementById("err_second_window").style.display = "block";
 });
 
 socket.on("err_not_enough_money", () => {
+  document.querySelector("body").classList.add("background");
   console.log("err_not_enough_money");
   document.getElementById("err_not_enough_money").style.display = "block";
 });
@@ -47,7 +53,7 @@ socket.on("game_start", (data) => {
   document.getElementById("card-deck").setAttribute("title", data.deck_length + " cards left");
 
   data.firstHand.forEach((element) => {
-    renderCard(element); //! Нужно пофиксить, игрок вне своего хода может кидать карту если хватает маны
+    renderCard(element);
   });
 
   data.secondHand.forEach(() => {
@@ -76,10 +82,12 @@ socket.on("turn", (data) => {
     document.getElementById("turn_nickname").innerText = myLogin + " turn";
     document.getElementById("enemy-mana").innerText = data.secondMana + " Mana";
     document.getElementById("my-mana").innerText = data.firstMana + " Mana";
+    document.getElementById("cards").style.backgroundColor = "rgba(109, 109, 109, 0.78)";
   } else {
     document.getElementById("turn_nickname").innerText = opLogin + " turn";
     document.getElementById("enemy-mana").innerText = data.secondMana + " Mana";
     document.getElementById("my-mana").innerText = data.firstMana + " Mana";
+    document.getElementById("cards").style.backgroundColor = "rgba(0, 0, 0, 0.78)";
   }
 });
 

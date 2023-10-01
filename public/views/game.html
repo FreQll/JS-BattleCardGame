@@ -4,88 +4,176 @@
     <meta charset="UTF-8" />
     <title>Marvel Card Masters</title>
     <link rel="stylesheet" href="/game.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
+    <div class="background">
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
     <div id="loading-container">
-        <h1>Game test</h1>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="/game.js"></script>
-        <div id="waiting_for_opponent" style="display: none">WAITING</div>
-        <div id="opponent_login" style="display: none">
+      <a class="goBack" href="/"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+          /></svg
+      ></a>
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="/game.js"></script>
+      <div id="waiting_for_opponent" style="display: none">
+        WAITING FOR OPPONENT
+      </div>
+      <div id="opponent_login" style="display: none">
         Your opponent: <span id="opponent"></span>
-        </div>
-        <div id="opponent_disconnected" style="display: none">
+      </div>
+      <div id="opponent_disconnected" style="display: none">
         Your opponent disconnected
-        <a href="/">Return to menu</a>
-        </div>
-        <div id="err_second_window" style="display: none">
+        <a class="goBack-link" href="/">Return to menu</a>
+      </div>
+      <div id="err_second_window" style="display: none">
         ERROR You can play only one game
-        </div>
+      </div>
     </div>
 
-    <div id="game_board" style="display: none;">
-        <div class="board_bg"></div>
-        <div class="about_players">
-          <div class="about_player">
-            <div class="my_properties">
-              <div class="mana_circle">
-                <div id="my-mana"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 187 187" fill="none">
-                  <circle cx="87.5" cy="99.5" r="75" fill="#E8D5D5" stroke="#FF5353" stroke-opacity="0.46" stroke-width="20"/>
-                </svg>
-              </div>
-              <div class="hp_circle">
-                <div id="my-hp"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 187 187" fill="none">
-                  <circle cx="87.5" cy="99.5" r="75" fill="#D7E8D5" stroke="#3D7A00" stroke-opacity="0.46" stroke-width="20"/>
-                </svg>
-              </div>
-            </div>
-            <div class="my_info">
-              <div id="my-name"></div>
-              <img id="my-portrait"></img>
-            </div>
-          </div>
-          <div class="about_opponent">
+    <div id="game_board" style="display: none">
+      <div class="board_bg"></div>
+      <div class="about_players">
+        <div class="about_player">
+          <div class="my_properties">
             <div class="mana_circle">
-              <div id="enemy-mana"></div>
-              <svg class="enemy_svg" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 187 187" fill="none">
-                <circle cx="87.5" cy="99.5" r="75" fill="#E8D5D5" stroke="#FF5353" stroke-opacity="0.46" stroke-width="20"/>
+              <div id="my-mana"></div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                viewBox="0 0 187 187"
+                fill="none"
+              >
+                <circle
+                  cx="87.5"
+                  cy="99.5"
+                  r="75"
+                  fill="#D8D5E8"
+                  stroke="#5359FF"
+                  stroke-opacity="0.46"
+                  stroke-width="20"
+                />
               </svg>
             </div>
             <div class="hp_circle">
-              <div id="enemy-hp"></div>
-              <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 187 187" fill="none">
-                <circle cx="87.5" cy="99.5" r="75" fill="#D7E8D5" stroke="#3D7A00" stroke-opacity="0.46" stroke-width="20"/>
+              <div id="my-hp"></div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                viewBox="0 0 187 187"
+                fill="none"
+              >
+                <circle
+                  cx="87.5"
+                  cy="99.5"
+                  r="75"
+                  fill="#E8D5D5"
+                  stroke="#FF5353"
+                  stroke-opacity="0.46"
+                  stroke-width="20"
+                />
               </svg>
             </div>
-            <div class="opponent_info">
-              <div id="enemy-name"></div>
-              <img id="enemy-portrait"></img>
-            </div>
+          </div>
+          <div class="my_info">
+            <div id="my-name"></div>
+            <img id="my-portrait" /><
           </div>
         </div>
-        <div class="game_info">
-          <div id="timer"></div>
-          <div id="turn_nickname"></div>
-        </div>
-        <div id="enemy-cards"></div>
-        <div class="center">
-          <div class="card-deck-container">
-            <div class="card-deck_image-container">
-              <img src="../images/card-back.png" id="card-deck" alt="">
-            </div>
+        <div class="about_opponent">
+          <div class="mana_circle">
+            <div id="enemy-mana"></div>
+            <svg
+              class="enemy_svg"
+              xmlns="http://www.w3.org/2000/svg"
+              width="70"
+              height="70"
+              viewBox="0 0 187 187"
+              fill="none"
+            >
+              <circle
+                cx="87.5"
+                cy="99.5"
+                r="75"
+                fill="#D8D5E8"
+                stroke="#5359FF"
+                stroke-opacity="0.46"
+                stroke-width="20"
+              />
+            </svg>
           </div>
-          <button id="pass_btn" onclick="passOnClick()">Pass</button>
+          <div class="hp_circle">
+            <div id="enemy-hp"></div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="70"
+              height="70"
+              viewBox="0 0 187 187"
+              fill="none"
+            >
+              <circle
+                cx="87.5"
+                cy="99.5"
+                r="75"
+                fill="#E8D5D5"
+                stroke="#FF5353"
+                stroke-opacity="0.46"
+                stroke-width="20"
+              />
+            </svg>
+          </div>
+          <div class="opponent_info">
+            <div id="enemy-name"></div>
+            <img id="enemy-portrait" />
+          </div>
         </div>
-        <div id="cards"></div>
-        <!-- <div id="my-hp"></div> -->
+      </div>
+      <div class="game_info">
+        <div id="timer"></div>
+        <div id="turn_nickname"></div>
+      </div>
+      <div id="enemy-cards"></div>
+      <div class="center">
+        <div class="card-deck-container">
+          <div class="card-deck_image-container">
+            <img
+              src="../images/card-back.png"
+              id="card-deck"
+              alt="Back of Card"
+            />
+          </div>
+        </div>
+        <button id="pass_btn" class="button" onclick="passOnClick()">
+          Pass
+        </button>
+      </div>
+      <div id="cards"></div>
     </div>
 
-    <div id="game_over" style="display: none;">
+    <div id="game_over" style="display: none">
       <div class="game_over-container">
         <h1 id="game_over_message"></h1>
+        <a href="/" class="goBack-link">Go to Lobby</a>
       </div>
     </div>
   </body>

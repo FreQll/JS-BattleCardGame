@@ -1,253 +1,390 @@
-h1, body {
-    margin: 0;
-    padding: 0;
+h1,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Marvel, "Times New Roman", Times, serif;
+}
+
+#loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  margin-top: 50px;
+  font-size: 32px;
+}
+
+.goBack {
+  text-decoration: none;
+  position: absolute;
+  top: 25px;
+  left: 15px;
+  color: white;
+  transition: all 0.15s ease-in-out;
+}
+
+.goBack:hover {
+  color: #b8b8b8;
+}
+
+.goBack > svg {
+  width: 30px;
+  height: 30px;
+}
+
+.background {
+  overflow: auto;
+  background: linear-gradient(315deg, #682831 0%, #2e3c5f 100%);
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.wave {
+  background: rgb(255 255 255 / 5%);
+  border-radius: 1000% 1000% 0 0;
+  position: fixed;
+  width: 200%;
+  height: 12em;
+  animation: wave 10s -3s linear infinite;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.8;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+  bottom: -1.25em;
+  animation: wave 18s linear reverse infinite;
+  opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+  bottom: -2.5em;
+  animation: wave 20s -1s reverse infinite;
+  opacity: 0.9;
+}
+
+@keyframes wave {
+  2% {
+    transform: translateX(1);
+  }
+
+  25% {
+    transform: translateX(-25%);
+  }
+
+  50% {
+    transform: translateX(-50%);
+  }
+
+  75% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(1);
+  }
 }
 
 .board_bg {
-    margin: 0;
-    background: url('/background/GothamCity.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+  margin: 0;
+  background: url("/background/GothamCity.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .board_bg::after {
-    position: absolute;
-    content: "";
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
-    top: 0;
-    left: 0;
+  position: absolute;
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
 }
 
-#cards, #enemy-cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.78);
-    overflow-x: auto;
-    padding: 20px;
+#cards,
+#enemy-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.78);
+  overflow-x: auto;
+  padding: 20px;
 }
 
 #cards {
-    margin-top: 40px;
-    z-index: 1;
-    position: relative;
+  margin-top: 40px;
+  z-index: 1;
+  position: relative;
 }
 
 #enemy-cards {
-    padding: 10px 0;
-    position: relative;
-    height: 175px;
+  padding: 10px 0;
+  position: relative;
+  height: 175px;
 }
 
 .card {
-    width: 180px;
+  width: 180px;
 }
 
 #card-deck {
-    width: 140px;
+  width: 140px;
 }
 
 .enemy-card-container {
-    position: absolute;
-    left: 50px;
-    top: 0;
+  position: absolute;
+  left: 50px;
+  top: 0;
 }
 
 .enemy-card {
-    position: absolute;
-    top: 10px;
-    width: 120px;
+  position: absolute;
+  top: 10px;
+  width: 120px;
 }
 
-.card-container, .card-deck_image-container {
-    width: fit-content;
-    position: relative;
+.card-container,
+.card-deck_image-container {
+  width: fit-content;
+  position: relative;
 }
 
 .card-deck_image-container {
-    margin-left: 50px;
+  margin-left: 50px;
 }
 
-.card-container::before, .card-deck_image-container::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    height: 100%;
-    border-radius: 6px;
-    border: 2px solid #000;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+.card-container::before,
+.card-deck_image-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 100%;
+  border-radius: 6px;
+  border: 2px solid #000;
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 
 .card-container::before {
-    background: rgba(255, 83, 83, 0.46);
-} 
+  background: rgba(255, 83, 83, 0.46);
+}
 
 .card-deck_image-container::before {
-    background: rgba(83, 90, 255, 0.46);
-    width: 120%;
-    height: 110%;
+  background: rgba(83, 90, 255, 0.46);
+  width: 120%;
+  height: 110%;
 }
 
-.card-container::after, .card-deck_image-container::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 70%;
-    height: 90%;
-    border-radius: 6px;
-    border: 2px solid #000;
-    background: #D9D9D9;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+.card-container::after,
+.card-deck_image-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 90%;
+  border-radius: 6px;
+  border: 2px solid #000;
+  background: #d9d9d9;
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 
-#enemy-portrait, #my-portrait {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: block;
-}
-
-#enemy-portrait {
-
+#enemy-portrait,
+#my-portrait {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
 }
 
 .about_players {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .about_player {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 20px;
-    width: 95vw;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px;
+  width: 95vw;
 }
 
-.my_properties, .my_info, .opponent_info {
-    display: flex;
-    gap: 8px;
-    align-items: center;
+.my_properties,
+.my_info,
+.opponent_info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.my_info, .opponent_info {
-    gap: 15px;
+.my_info,
+.opponent_info {
+  gap: 15px;
 }
 
 .about_opponent {
-    position: absolute;
-    top: 85px;
-    right: 0;
-    z-index: 1;
-    display: flex;
-    margin-right: 30px;
+  position: absolute;
+  top: 85px;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  margin-right: 30px;
 }
 
-
 #enemy-name {
-    color: white;
-    text-align: center;
+  color: white;
+  text-align: center;
 }
 
 .enemy_svg {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
-.mana_circle, .hp_circle {
-    width: fit-content;
-    position: relative;
+.mana_circle,
+.hp_circle {
+  width: fit-content;
+  position: relative;
 }
 
-#my-mana, #my-hp, #enemy-hp, #enemy-mana {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+#my-mana,
+#my-hp,
+#enemy-hp,
+#enemy-mana {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 #enemy-mana {
-    transform: translate(-55%, -80%);
+  transform: translate(-55%, -80%);
 }
 
 #enemy-hp {
-    top: 40%;
-    left: 47%;
+  top: 40%;
+  left: 47%;
 }
 
 #my-name {
-    color: white;
-    display: flex;
-    align-items: center;
+  color: white;
+  display: flex;
+  align-items: center;
 }
 
 #pass_btn {
-    position: relative;
-    z-index: 100;
+  position: relative;
+  z-index: 100;
 }
 
 .game_info {
-    display: flex;
-    flex-direction: column;
-    color: white;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    text-align: center;
-    z-index: 1;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  z-index: 1;
 }
 
 .center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 40px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 30px;
 }
 
 .card-deck-container {
-    z-index: 2;
-    position: relative;
+  z-index: 2;
+  position: relative;
 }
-
 
 /* Game Over */
 
 #game_over {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    width: 100vw;
-    height: 100vh;
-    background-color: #00000077;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000077;
 }
 
 .game_over-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
 }
 
 #game_over_message {
-    font-size: 68px;
+  font-size: 68px;
+  color: white;
+}
+
+.goBack-link {
+  color: white;
+  font-size: 24px;
+  transition: all 0.15s ease-in-out;
+}
+
+.goBack-link:hover {
+  color: #b8b8b8;
+}
+
+.button {
+  padding: 8px 25px;
+  border-radius: 4px;
+  border: none;
+  background-color: #f23952;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.2s all;
+}
+
+.button:hover {
+  background-color: #b8183b;
+}
+
+.button:active {
+  background-color: #9a1738;
 }

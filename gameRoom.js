@@ -24,8 +24,12 @@ async function getCards() {
   }
 }
 
+function coinToss() {
+  return Math.random() < 0.5;
+}
+
 async function gameRoom(firstSocket, secondSocket) {
-  let turn = true;
+  let turn = coinToss();
   let timer = turnTime;
   let firstHand = [];
   let secondHand = [];
@@ -203,6 +207,14 @@ async function gameRoom(firstSocket, secondSocket) {
         : (enemyHp += Math.abs(data.attack));
     } else {
       myHp -= data.attack;
+    }
+
+    if (myHp <= 0) {
+      clearInterval(firstSocket.request.session.data.timerI);
+      clearInterval(secondSocket.request.session.data.timerI);
+
+      firstSocket.emit("game_over", { winner: false });
+      secondSocket.emit("game_over", { winner: true });
     }
 
     secondMana -= data.cost;

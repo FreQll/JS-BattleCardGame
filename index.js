@@ -97,7 +97,7 @@ io.on('connection', (socket) => {
         rooms[room_id][0].emit('opponent_connected', { myLogin: opLogin, opLogin: myLogin });
         let timerT = setTimeout(() => {
             gameRoom(rooms[room_id][0], rooms[room_id][1]);
-        }, 1000);
+        }, 3000);
         socket.request.session.data.timerT = timerT;
     }
     else {
@@ -134,7 +134,3 @@ io.on('connection', (socket) => {
     socket.request.session.data.player_id = player_id;
     console.log(`New connection: ${socket.request.session.data.login} Room: ${room_id} Player: ${player_id}`);
 });
-// 1 Меню
-// 2 logaut
-// 3 отрисовка карт
-// 4 механіка таймера
