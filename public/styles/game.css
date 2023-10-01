@@ -226,6 +226,18 @@ body {
   display: block;
 }
 
+.my_properties > .hp_circle {
+    font-size: 30px;
+}
+
+.about_opponent > .hp_circle {
+    font-size: 24px;
+}
+
+.about_opponent > .mana_circle {
+    font-size: 18px;
+}
+
 .about_players {
   position: absolute;
   width: 100%;
@@ -248,6 +260,7 @@ body {
   display: flex;
   gap: 8px;
   align-items: center;
+  font-size: 25px;
 }
 
 .my_info,
@@ -285,17 +298,17 @@ body {
 #enemy-mana {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 48%;
   transform: translate(-50%, -50%);
   text-align: center;
 }
 
 #enemy-mana {
-  transform: translate(-55%, -80%);
+  transform: translate(-50%, -80%);
 }
 
 #enemy-hp {
-  top: 40%;
+  top: 38%;
   left: 47%;
 }
 
@@ -307,7 +320,7 @@ body {
 
 #pass_btn {
   position: relative;
-  z-index: 100;
+  z-index: 1;
 }
 
 .game_info {
@@ -387,4 +400,8 @@ body {
 
 .button:active {
   background-color: #9a1738;
+}
+
+#opponent_login, #opponent_disconnected {
+    text-align: center;
 }
