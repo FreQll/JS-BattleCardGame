@@ -25,20 +25,62 @@
     </div>
 
     <div id="game_board" style="display: none;">
-        <div id="timer"></div>
-        <div id="enemy-name"></div>
-        <img id="enemy-portrait"></img>
-        <div id="enemy-hp"></div>
-        <div id="enemy-mana"></div>
+        <div class="board_bg"></div>
+        <div class="about_players">
+          <div class="about_player">
+            <div class="my_properties">
+              <div class="mana_circle">
+                <div id="my-mana"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 187 187" fill="none">
+                  <circle cx="87.5" cy="99.5" r="75" fill="#E8D5D5" stroke="#FF5353" stroke-opacity="0.46" stroke-width="20"/>
+                </svg>
+              </div>
+              <div class="hp_circle">
+                <div id="my-hp"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 187 187" fill="none">
+                  <circle cx="87.5" cy="99.5" r="75" fill="#D7E8D5" stroke="#3D7A00" stroke-opacity="0.46" stroke-width="20"/>
+                </svg>
+              </div>
+            </div>
+            <div class="my_info">
+              <div id="my-name"></div>
+              <img id="my-portrait"></img>
+            </div>
+          </div>
+          <div class="about_opponent">
+            <div class="mana_circle">
+              <div id="enemy-mana"></div>
+              <svg class="enemy_svg" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 187 187" fill="none">
+                <circle cx="87.5" cy="99.5" r="75" fill="#E8D5D5" stroke="#FF5353" stroke-opacity="0.46" stroke-width="20"/>
+              </svg>
+            </div>
+            <div class="hp_circle">
+              <div id="enemy-hp"></div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 187 187" fill="none">
+                <circle cx="87.5" cy="99.5" r="75" fill="#D7E8D5" stroke="#3D7A00" stroke-opacity="0.46" stroke-width="20"/>
+              </svg>
+            </div>
+            <div class="opponent_info">
+              <div id="enemy-name"></div>
+              <img id="enemy-portrait"></img>
+            </div>
+          </div>
+        </div>
+        <div class="game_info">
+          <div id="timer"></div>
+          <div id="turn_nickname"></div>
+        </div>
         <div id="enemy-cards"></div>
-        <div id="turn_nickname"></div>
-        <button id="pass_btn" onclick="passOnClick()">Pass</button>
-        <img src="../images/card-back.png" id="card-deck" alt="">
-        <div id="my-mana"></div>
+        <div class="center">
+          <div class="card-deck-container">
+            <div class="card-deck_image-container">
+              <img src="../images/card-back.png" id="card-deck" alt="">
+            </div>
+          </div>
+          <button id="pass_btn" onclick="passOnClick()">Pass</button>
+        </div>
         <div id="cards"></div>
-        <img id="my-portrait"></img>
-        <div id="my-name"></div>
-        <div id="my-hp"></div>
+        <!-- <div id="my-hp"></div> -->
     </div>
 
     <div id="game_over" style="display: none;">

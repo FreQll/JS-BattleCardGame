@@ -1,6 +1,7 @@
 const turnTime = 15;
-const hp = 20;
+const hp = 5;
 const cardsData = async () => await getCards();
+
 const array = async () =>
   await [...(await cardsData()).cards, ...(await cardsData()).cards];
 
@@ -165,6 +166,8 @@ async function gameRoom(firstSocket, secondSocket) {
     } else {
       enemyHp -= data.attack;
     }
+
+    console.log(enemyHp);
 
     if (enemyHp <= 0) {
       clearInterval(firstSocket.request.session.data.timerI);

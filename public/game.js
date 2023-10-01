@@ -122,6 +122,8 @@ socket.on("play_card", (data) => {
 });
 
 const renderCard = (card) => {
+  const div = document.createElement("div");
+  div.classList.add('card-container');
   const image = document.createElement("img");
   image.src = card.src;
   image.classList.add('card');
@@ -130,17 +132,28 @@ const renderCard = (card) => {
       return;
     } else {
       //! animation for playing card
+      console.log("1");
       playCard(card);
       event.currentTarget.remove();
     }
   });
-  document.getElementById("cards").appendChild(image);
+  div.appendChild(image);
+  document.getElementById("cards").appendChild(div);
 };
 
+
 const renderCardBack = () => {
+  let count = document.querySelectorAll(".enemy-card-container").length;
+
+  const div = document.createElement("div");
   const image = document.createElement("img");
+  image.classList.add('enemy-card');
+  div.classList.add('enemy-card-container');
   image.src = "/images/card-back.png";
-  document.getElementById("enemy-cards").appendChild(image);
+  div.appendChild(image);
+  const x = (count + 1) * 30;
+  div.style.left = `${x}px`;
+  document.getElementById("enemy-cards").appendChild(div);
 };
 
 socket.on("game_over", (data) => {
