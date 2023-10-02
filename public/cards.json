@@ -218,6 +218,223 @@
       "src": "./images/yondu.webp",
       "cost": 1,
       "attack": 2
+    },
+    {
+      "id": 32,
+      "name": "Absorbing Man",
+      "src": "./images/absorbing-man.webp",
+      "cost": 4,
+      "attack": 4
+    },
+    {
+      "id": 33,
+      "name": "Black Panther",
+      "src": "./images/black-panther.webp",
+      "cost": 5,
+      "attack": 4
+    },
+    {
+      "id": 34,
+      "name": "Blue Marvel",
+      "src": "./images/blue-marvel.webp",
+      "cost": 5,
+      "attack": 3
+    },
+    {
+      "id": 35,
+      "name": "Brood",
+      "src": "./images/brood.webp",
+      "cost": 3,
+      "attack": 2
+    },
+    {
+      "id": 36,
+      "name": "Captain Marvel",
+      "src": "./images/captain-marvel.webp",
+      "cost": 4,
+      "attack": 4
+    },
+    {
+      "id": 37,
+      "name": "Deadpool",
+      "src": "./images/deadpool.webp",
+      "cost": 1,
+      "attack": 1
+    },
+    {
+      "id": 38,
+      "name": "Doctor Strange",
+      "src": "./images/doctor-strange.webp",
+      "cost": 3,
+      "attack": 3
+    },
+    {
+      "id": 39,
+      "name": "Ghost Rider",
+      "src": "./images/ghost-rider.webp",
+      "cost": 4,
+      "attack": 3
+    },
+    {
+      "id": 40,
+      "name": "Green Goblin",
+      "src": "./images/green-goblin.webp",
+      "cost": 3,
+      "attack": -3
+    },
+    {
+      "id": 41,
+      "name": "Hobgoblin",
+      "src": "./images/hobgoblin.webp",
+      "cost": 5,
+      "attack": -8
+    },
+    {
+      "id": 42,
+      "name": "Iceman",
+      "src": "./images/iceman.webp",
+      "cost": 1,
+      "attack": 2
+    },
+    {
+      "id": 43,
+      "name": "Kingpin",
+      "src": "./images/kingpin.webp",
+      "cost": 3,
+      "attack": 4
+    },
+    {
+      "id": 44,
+      "name": "Nick Fury",
+      "src": "./images/nick-fury.webp",
+      "cost": 4,
+      "attack": 5
+    },
+    {
+      "id": 45,
+      "name": "Nimrod",
+      "src": "./images/nimrod.webp",
+      "cost": 5,
+      "attack": 6
+    },
+    {
+      "id": 46,
+      "name": "Ninja",
+      "src": "./images/ninja.webp",
+      "cost": 1,
+      "attack": -2
+    },
+    {
+      "id": 47,
+      "name": "Rocket Raccoon",
+      "src": "./images/rocket-raccoon.webp",
+      "cost": 1,
+      "attack": 2
+    },
+    {
+      "id": 48,
+      "name": "Sandman",
+      "src": "./images/sandman.webp",
+      "cost": 5,
+      "attack": 3
+    },
+    {
+      "id": 49,
+      "name": "Shuri",
+      "src": "./images/shuri.webp",
+      "cost": 4,
+      "attack": 2
+    },
+    {
+      "id": 50,
+      "name": "Spectrum",
+      "src": "./images/spectrum.webp",
+      "cost": 6,
+      "attack": 5
+    },
+    {
+      "id": 51,
+      "name": "Star-Lord",
+      "src": "./images/star-lord.webp",
+      "cost": 2,
+      "attack": 2
+    },
+    {
+      "id": 52,
+      "name": "The Hood",
+      "src": "./images/the-hood.webp",
+      "cost": 1,
+      "attack": -3
+    },
+    {
+      "id": 53,
+      "name": "The Void",
+      "src": "./images/the-void.webp",
+      "cost": 4,
+      "attack": -10
+    },
+    {
+      "id": 54,
+      "name": "Ultron",
+      "src": "./images/ultron.webp",
+      "cost": 6,
+      "attack": 8
+    },
+    {
+      "id": 55,
+      "name": "Venom",
+      "src": "./images/venom.webp",
+      "cost": 3,
+      "attack": 3
+    },
+    {
+      "id": 56,
+      "name": "Viper",
+      "src": "./images/viper.webp",
+      "cost": 2,
+      "attack": 3
+    },
+    {
+      "id": 57,
+      "name": "Warpath",
+      "src": "./images/warpath.webp",
+      "cost": 4,
+      "attack": 5
+    },
+    {
+      "id": 58,
+      "name": "Wasp",
+      "src": "./images/wasp.webp",
+      "cost": 0,
+      "attack": 1
+    },
+    {
+      "id": 59,
+      "name": "Witchfire",
+      "src": "./images/witchfire.webp",
+      "cost": 2,
+      "attack": 3
+    },
+    {
+      "id": 60,
+      "name": "Wolverine",
+      "src": "./images/wolverine.webp",
+      "cost": 2,
+      "attack": 2
+    },
+    {
+      "id": 61,
+      "name": "Yellow Jacket",
+      "src": "./images/yellowjacket.webp",
+      "cost": 0,
+      "attack": 2
+    },
+    {
+      "id": 62,
+      "name": "Yondu",
+      "src": "./images/yondu.webp",
+      "cost": 1,
+      "attack": 2
     }
   ]
 }

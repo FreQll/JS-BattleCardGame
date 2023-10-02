@@ -3,7 +3,7 @@ const hp = 20;
 const cardsData = async () => await getCards();
 
 const array = async () =>
-  await [...(await cardsData()).cards, ...(await cardsData()).cards];
+  await [...(await cardsData()).cards];
 
 function randomIntFromInterval(min, max) {
   // min and max included
@@ -102,21 +102,24 @@ async function gameRoom(firstSocket, secondSocket) {
     if (firstManaLimit < 10) {
       if (turn) {
         secondManaLimit++;
-        secondMana = secondManaLimit;
       } else {
         firstManaLimit++;
-        firstMana = firstManaLimit;
       }
+    }
+    if (turn) {
+      secondMana = secondManaLimit;
+    } else {
+      firstMana = firstManaLimit;
     }
 
     if (turn && secondHand.length < 10) {
       secondHand.push(
         cardArray[randomIntFromInterval(0, cardArray.length - 1)]
       );
-      cardArray.splice(cardArray.indexOf(secondHand[secondHand.length]), 1);
+      cardArray.splice(cardArray.indexOf(secondHand[secondHand.length - 1]), 1);
     } else if (!turn && firstHand.length < 10) {
       firstHand.push(cardArray[randomIntFromInterval(0, cardArray.length - 1)]);
-      cardArray.splice(cardArray.indexOf(firstHand[firstHand.length]), 1);
+      cardArray.splice(cardArray.indexOf(firstHand[firstHand.length - 1]), 1);
     }
 
     firstSocket.emit("mana", { firstMana: firstMana, secondMana: secondMana });
@@ -185,7 +188,14 @@ async function gameRoom(firstSocket, secondSocket) {
     secondSocket.emit("mana", { firstMana: secondMana, secondMana: firstMana });
     firstSocket.emit("hp", { myHp: myHp, enemyHp: enemyHp });
     secondSocket.emit("hp", { myHp: enemyHp, enemyHp: myHp });
-    firstHand.splice(firstHand.indexOf(data), 1);
+    let index = 0;
+    for (let i = 0; i < firstHand.length; i++) {
+      if (firstHand[i].id === data.id) {
+        index = i;
+        break;
+      }
+    }
+    firstHand.splice(index, 1);
     secondSocket.emit("play_card", {
       cards: firstHand,
       myHp: myHp,
@@ -222,7 +232,14 @@ async function gameRoom(firstSocket, secondSocket) {
     secondSocket.emit("mana", { firstMana: secondMana, secondMana: firstMana });
     firstSocket.emit("hp", { myHp: myHp, enemyHp: enemyHp });
     secondSocket.emit("hp", { myHp: enemyHp, enemyHp: myHp });
-    secondHand.splice(secondHand.indexOf(data), 1);
+    let index = 0;
+    for (let i = 0; i < secondHand.length; i++) {
+      if (secondHand[i].id === data.id) {
+        index = i;
+        break;
+      }
+    }
+    secondHand.splice(index, 1);
     firstSocket.emit("play_card", {
       cards: secondHand,
       myHp: enemyHp,
