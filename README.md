@@ -8,8 +8,8 @@ And then you can see our game by address ```localhost:3000```
 <i>Before start you probably need to run this line of code so it will correctly work with Database: </i> ```mysql -p dbname -u > db.sql```
 
 <h1>Gameplay</h1>
-![2023-10-02 20-47-28](https://github.com/FreQll/Card-game/assets/62791316/240d9ced-469d-4a58-9b54-1d13fc6e1d6a)
 
+![gameplay](https://github.com/FreQll/Card-game/assets/62791316/2e5dc0a1-4ce0-4dce-8157-38d2d233bb27)
 
 <h1>Game Rules</h1>
 
